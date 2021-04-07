@@ -23,6 +23,30 @@ namespace winhiddump
                 Console.Write(string.Format("{0:X4}:{1:X4}: {2} - {3}\nPATH:{4}\n", 
                     dev.VendorID, dev.ProductID, dev.GetManufacturer(), dev.GetProductName(), dev.DevicePath));
 //                Console.WriteLine(dev.ToString() + " @ " + dev.DevicePath);
+                string manu = "";
+                string prod = "";
+
+                try
+                {
+                    manu = dev.GetManufacturer();
+                }
+                catch (Exception e)
+                {
+                    Console.Error.WriteLine("Failed to get manufacturer");
+                }
+
+                try
+                {
+                    prod = dev.GetProductName();
+                }
+                catch (Exception e)
+                {
+                    Console.Error.WriteLine("Failed to get product name");
+                }
+
+                Console.Write(string.Format("{0:X4}:{1:X4}: {2} {3}\nPATH:{4}\n",
+                    dev.VendorID, dev.ProductID, manu, prod, dev.DevicePath));
+
                 byte[] rawReportDescriptor = dev.GetRawReportDescriptor();
                 Console.Write("DESCRIPTOR:\n  ");
                 for( int i=0; i< rawReportDescriptor.Length; i++)
