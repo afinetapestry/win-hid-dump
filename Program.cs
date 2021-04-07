@@ -37,7 +37,7 @@ namespace winhiddump
 
                 Console.Write(string.Format("{0:X4}:{1:X4}: {2} - {3}\nPATH:{4}\n", 
                     dev.VendorID, dev.ProductID, dev.GetManufacturer(), dev.GetProductName(), dev.DevicePath));
-//                Console.WriteLine(dev.ToString() + " @ " + dev.DevicePath);
+
                 string manu = "";
                 string prod = "";
 
@@ -63,17 +63,14 @@ namespace winhiddump
                     dev.VendorID, dev.ProductID, manu, prod, dev.DevicePath));
 
                 byte[] rawReportDescriptor = dev.GetRawReportDescriptor();
-                Console.Write("DESCRIPTOR:\n  ");
-                for( int i=0; i< rawReportDescriptor.Length; i++)
+                Console.Write("DESCRIPTOR: ({0} bytes)\n  ", rawReportDescriptor.Length);
+                for (int i = 0; i < rawReportDescriptor.Length; i++)
                 {
                     Console.Write(rawReportDescriptor[i].ToString("X2") + " ");
                     Console.Write((i % 16 == 15) ? "\n  " : " ");
                 }
-                Console.WriteLine("\n  ({0} bytes)", rawReportDescriptor.Length);
-//                Console.WriteLine("  {0} ({1} bytes)", string.Join(" ", rawReportDescriptor.Select(d => d.ToString("X2"))), rawReportDescriptor.Length);
+                Console.WriteLine("\n");
             }
-//            Console.WriteLine("Press any key to exit");
-//            Console.ReadKey();
         }
     }
 }
