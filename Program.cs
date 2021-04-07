@@ -35,9 +35,6 @@ namespace winhiddump
                     continue;
                 }
 
-                Console.Write(string.Format("{0:X4}:{1:X4}: {2} - {3}\nPATH:{4}\n", 
-                    dev.VendorID, dev.ProductID, dev.GetManufacturer(), dev.GetProductName(), dev.DevicePath));
-
                 string manu = "";
                 string prod = "";
 
@@ -45,7 +42,7 @@ namespace winhiddump
                 {
                     manu = dev.GetManufacturer();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     Console.Error.WriteLine("Failed to get manufacturer");
                 }
@@ -54,7 +51,7 @@ namespace winhiddump
                 {
                     prod = dev.GetProductName();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     Console.Error.WriteLine("Failed to get product name");
                 }
