@@ -9,10 +9,18 @@ namespace winhiddump
     class Program
     {
         static string GetArgument(IEnumerable<string> args, string option) => args.SkipWhile(i => i != option).Skip(1).Take(1).FirstOrDefault();
+        static bool IsArgument(IEnumerable<string> args, string option) => args.Any(i => i == option);
 
         static void Main(string[] args)
         {
             Console.WriteLine("WinHIDdump:");
+
+            var help = IsArgument(args, "--help");
+            if (help)
+            {
+                Console.WriteLine("Usage: winhiddump.exe [--help] [--vid hex] [--pid hex]");
+                Environment.Exit(0);
+            }
 
             string vidpid = GetArgument(args, "--vidpid");
 //            Console.WriteLine("Got vidpid: " + vidpid);
